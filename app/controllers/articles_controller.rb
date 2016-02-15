@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:edit, :update, :show, :destroy]
-  
+
   def index
     @articles = Article.all
   end
@@ -10,8 +10,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    debugger
     #render plain: params[:article].inspect
     @article = Article.new(article_params)
+    @article.user = User.first
     if @article.save
       flash[:success] = "Post was successfully created"
       redirect_to article_path(@article)
@@ -47,7 +49,7 @@ class ArticlesController < ApplicationController
   def set_article
     @article = Article.find(params[:id])
   end
-  
+
   def article_params
     # This is whitelisting values that you want to pass to the view
     params.require(:article).permit(:title, :description)

@@ -53,7 +53,7 @@ class ArticlesController < ApplicationController
 
   def article_params
     # This is whitelisting values that you want to pass to the view
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, category_ids: [])
   end
 
     def require_same_user
